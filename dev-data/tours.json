@@ -1,0 +1,6 @@
+{
+    "Name" : "Forest",
+    "Duration"  : 5,
+    "MaxGroupSize" :25,
+    "Price": 25500
+}
