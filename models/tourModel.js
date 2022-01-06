@@ -18,8 +18,6 @@ const tourSchema = new Schema({
     }
 });
 
-tourSchema.index({ name: 1 });
-
 const Tour = mongoose.model('Tour', tourSchema);
 
 //Exporting modal class for global use.
