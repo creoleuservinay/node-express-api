@@ -4,7 +4,7 @@ exports.getAllTours = async (req, res) => {
     try {
         const allTours = await Tour.find({});
         res.status(200).json({
-            message: 'Tours',
+            message: 'Available Tours',
             total: allTours.length,
             status: "Success",
             data: {
