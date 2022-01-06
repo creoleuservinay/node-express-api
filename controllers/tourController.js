@@ -69,7 +69,7 @@ exports.updateTour = async (req, res) => {
         res.status(400).json({
             status: 'Fail',
             data: error,
-            message: 'Something went wrong'
+            message: 'Something went wrong please check the inputs'
         });
     }
 }
