@@ -12,10 +12,10 @@ exports.getAllTours = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(404).json({
-      message: 'No result found',
+    res.status(400).json({
+      message: 'No result found!!',
       status: 'Fail',
-      data: 'No result found',
+      data: null,
     });
   }
 };
@@ -32,7 +32,7 @@ exports.createTour = async (req, res) => {
     res.status(400).json({
       status: 'Fail',
       data: error,
-      message: 'Something went wrong',
+      message: 'Something went wrong!!',
     });
   }
 };
