@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoosedb = require('mongoose');
+const { Schema } = mongoosedb;
 
-const { Schema } = mongoose;
-
+// Schema for tour.
 const tourSchema = new Schema({
   name: {
     type: String,
@@ -19,7 +19,7 @@ const tourSchema = new Schema({
   },
 });
 
-const Tour = mongoose.model('Tour', tourSchema);
+const Tour = mongoosedb.model('Tour', tourSchema);
 
 //  Exporting modal class for global use.
-module.exports = Tour;
+export default Tour;

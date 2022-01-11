@@ -1,6 +1,6 @@
 const { assert } = require('chai');
-let chai = require('chai');
-let chaiHttp = require('chai-http');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 const { it, describe, after } = require('mocha');
 const nock = require('nock');
 const app = require('../app');
