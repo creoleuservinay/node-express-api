@@ -1,8 +1,9 @@
-const mongoosedb = require('mongoose');
-const { Schema } = mongoosedb;
+import { Schema, model, connect } from 'mongoose';
+import { TourInterface } from '../interface/tour-interface';
+const mongoose = require('mongoose');
 
 // Schema for tour.
-const tourSchema = new Schema({
+const tourSchema = new Schema<TourInterface>({
   name: {
     type: String,
     required: [true, 'Must have name'],
@@ -19,7 +20,7 @@ const tourSchema = new Schema({
   },
 });
 
-const Tour = mongoosedb.model('Tour', tourSchema);
+const Tour = mongoose.model('Tour', tourSchema);
 
 //  Exporting modal class for global use.
 export default Tour;

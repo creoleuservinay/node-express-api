@@ -6,6 +6,9 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-config-airbnb"
   ],
   parserOptions: {
     ecmaVersion: 13,
@@ -13,4 +16,5 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-var-requires': 0,
   },
+  
 };

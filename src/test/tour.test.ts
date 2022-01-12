@@ -1,24 +1,24 @@
 const { assert } = require('chai');
-const chai = require('chai');
+const chaii = require('chai');
 const chaiHttp = require('chai-http');
 const { it, describe, after } = require('mocha');
 const nock = require('nock');
 const app = require('../app');
 const sinon = require('sinon');
-const tourController = require('../controllers/tourController');
-const should = chai.should();
-const { expect } = chai;
-chai.use(chaiHttp);
+const tourController = require('../controllers/toursController');
+const should = chaii.should();
+const { expect } = chaii;
+chaii.use(chaiHttp);
 
 describe.only('Welcome Get api', () => {
   it('Welcome API', () => {
-    chai.request(app)
+    chaii.request(app)
       .get('/api/welcome')
-      .end((err, res) => {
+      .end((err: any, res: any) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         const actualValue = res.body.message;
-        expect(actualValue).to.be.equal('Hello from API');
+        expect(actualValue).to.be.equal('Hello');
       });
   });
 });
@@ -69,8 +69,6 @@ describe.only('Update the tour', () => {
   })
 });
 
-
-
 // with chai
 // describe.skip('Create Tour', () => {
 //   it('Should POST valid tour', () => {
@@ -78,7 +76,7 @@ describe.only('Update the tour', () => {
 //       name: "Toodo",
 //       price: 5555,
 //     }
-//     chai.request(app)
+//     chaii.request(app)
 //       .post('/api/v1/tours')
 //       .send(newtour)
 //       .end((err, res) => {
@@ -90,7 +88,7 @@ describe.only('Update the tour', () => {
 
 // describe.skip('Task list api', () => {
 //   it('Get tours', () => {
-//     chai.request(app)
+//     chaii.request(app)
 //       .get('/api/v1/tours')
 //       .end((err, res) => {
 //         console.log(res.body);

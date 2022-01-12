@@ -11,5 +11,6 @@ router
   .get(tourController.routeManager.getTour)
   .patch(tourController.routeManager.updateTour)
   .delete(tourController.routeManager.deleteTour);
+  
 
 module.exports = router;
