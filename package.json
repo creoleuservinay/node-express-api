@@ -11,13 +11,15 @@
   "author": "Vinay kaithwas",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "helmet": "^5.0.1",
     "mongoose": "^5.13.14",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "paypal-rest-sdk": "^1.8.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
