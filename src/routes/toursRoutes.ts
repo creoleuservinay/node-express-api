@@ -1,9 +1,10 @@
 import express from 'express';
 import tourController from '../controllers/toursController';
+import authController from '../controllers/authController';
 const router = express.Router();
 
 router.route('/')
-  .get(tourController.routeManager.getAllTours)
+  .get(authController.authController.protectMiddleware, tourController.routeManager.getAllTours)
   .post(tourController.routeManager.createTour);
 
 router

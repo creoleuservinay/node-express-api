@@ -1,8 +1,9 @@
 import express from 'express';
-import userAuth from '../controllers/authController';
+import authController from '../controllers/authController';
 const router = express.Router();
 
-router.post('/singup', userAuth.singUp);
+router.post('/singup', authController.authController.singUp);
+router.post('/login', authController.authController.loggingIn);
 
 // router.route('/')
 //   .get(userAuth.login)

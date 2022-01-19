@@ -3,7 +3,11 @@ import JSONResponse from '../libs/json-responses';
 
 const paypal = require('paypal-rest-sdk');
 
-
+paypal.configure({
+  'mode': 'sandbox',
+  'client_id': 'VASz2aeWWeLH4wAmWd1sM1JRuvtq3JM5fSMbJwk4jERuv2jQpL93aSM6OszArElh46x-xeRegtcuinqkX',
+  'client_secret': 'VEHNsJ_rDft46PCZZnfc9EiBmJd3qjhME7PqkUEN-tWs9gRHe1qz0e3TlNjvgF9oWNDhP-qov3MKfUVy_'
+});
 
 class PaymentRouteManager {
   createPayment = (req: Request, res: Response) => {
@@ -44,7 +48,7 @@ class PaymentRouteManager {
           for (let i = 0; i < payment.links.length; i++) {
             if (payment.links[i].rel === 'approval_url') {
               //res.redirect(payment.links[i].href);
-              return JSONResponse.success(req, res, 200, 'Payment created successfully', {link: payment.links[i].href, data: 'paymentData'}, 2);
+              return JSONResponse.success(req, res, 200, 'Payment created successfully', {link: payment.links[i].href, data: create_payment_json}, 2);
             }
           }
         }
