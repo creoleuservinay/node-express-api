@@ -18,6 +18,11 @@ const UserSchema = new Schema({
     trim: true,
     lowercase: true,
   },
+  role: {
+    type: String,
+    enum:  ['admin', 'guide', 'lead-guid', 'user'],
+    default: 'user'
+  },
   password: {
     type: String,
     required: [true, 'Must have password'],

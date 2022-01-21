@@ -20,5 +20,13 @@ class JSONResponse {
             data: data,
         });
     }
+
+    static unhandledError(req: Request, res: Response, statusCode: number, message: string,) {
+        return res.status(statusCode).json({
+            status: "Fail",
+            code: statusCode,
+            message: message || 'internal server error',
+        });
+    }
 }
 export default JSONResponse;

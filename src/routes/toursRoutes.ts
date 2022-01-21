@@ -4,14 +4,14 @@ import authController from '../controllers/authController';
 const router = express.Router();
 
 router.route('/')
-  .get(authController.authController.protectMiddleware, tourController.routeManager.getAllTours)
+  .get(authController.authController.protect, tourController.routeManager.getAllTours)
   .post(tourController.routeManager.createTour);
 
 router
   .route('/:id')
   .get(tourController.routeManager.getTour)
   .patch(tourController.routeManager.updateTour)
-  .delete(tourController.routeManager.deleteTour);
+  .delete(authController.authController.protect, tourController.routeManager.deleteTour);
   
 
 module.exports = router;

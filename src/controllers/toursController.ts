@@ -2,6 +2,7 @@ import { request, Request, Response } from 'express';
 import JSONResponse from '../libs/json-responses';
 import Tour from "../models/tourModel";
 import { TourInterface } from '../interface/tour-interface';
+import { Error } from 'mongoose';
 
 class RouteManager {
 
@@ -25,12 +26,12 @@ class RouteManager {
   };
 
   deleteTour = async (req: Request, res: Response): Promise<object> => {
+    const { id } = req.params;
     try {
-      const { id } = req.params;
-      await Tour.deleteOne({ _id: id });
-      return JSONResponse.success(req, res, 200, 'Tour deleted successfully', {}, 0);
+      const delRes = await Tour.deleteOne({ _id: id });
+      return JSONResponse.success(req, res, 200, 'Tour deleted successfully', {}, 1);
     } catch (error) {
-      return JSONResponse.serverError(req, res, 400, 'Something went wrong!!', {});
+      return JSONResponse.serverError(req, res, 404, 'Something went wrong!!', {});
     }
   };
 

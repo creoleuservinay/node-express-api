@@ -12,8 +12,11 @@ class AuthenticationController {
     return jwt.sign({id: id}, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRE
     });
-
   }
+
+  createAndSendToken = (user: any,statusCode: Number, res:Response) => {
+
+  };
 
 
   singUp = async (req: Request, res: Response): Promise<object> => {
@@ -56,11 +59,9 @@ class AuthenticationController {
     } else {
       return JSONResponse.serverError(req, res, 401, 'Unauthorished', {});
     }
-
-    console.log('Outside');
   }
 
-  protectMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+  protect = async (req: Request, res: Response, next: NextFunction) => {
     // Get the token and check the token.
     let token = '';
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
@@ -72,7 +73,6 @@ class AuthenticationController {
     
     // // Varification
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
     if(!decoded){
       return JSONResponse.serverError(req, res, 401, 'Unauthorished', {});
     }
@@ -85,6 +85,17 @@ class AuthenticationController {
 
     next();
   }
+
+  restrictTo =  (req: Request, res: Response,next: NextFunction) => {
+    next();
+    // return (req:Request,res: Response, next: NextFunction)=> {
+    //   if(!roles.includes(req.user.role)){
+    //     return new Error('Not authorishhed');
+    //   } else {
+        
+    //   }
+    // }
+  }; 
 }
 
 const authController = new AuthenticationController();

@@ -10,7 +10,7 @@ const should = chaii.should();
 const { expect } = chaii;
 chaii.use(chaiHttp);
 
-describe.only('Welcome Get api', () => {
+describe.skip('Welcome Get api', () => {
   it('Welcome API', () => {
     chaii.request(app)
       .get('/api/welcome')
