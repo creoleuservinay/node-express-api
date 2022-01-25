@@ -3,11 +3,7 @@ import JSONResponse from '../libs/json-responses';
 
 const paypal = require('paypal-rest-sdk');
 
-paypal.configure({
-  'mode': 'sandbox',
-  'client_id': 'ASz2aeWWeLH4wAmWd1sM1JRuvtq3JM5fSMbJwk4jERuv2jQpL93aSM6OszArElh46x-xeRegtcuinqkXK',
-  'client_secret': 'EHNsJ_rDft46PCZZnfc9EiBmJd3qjhME7PqkUEN-tWs9gRHe1qz0e3TlNjvgF9oWNDhP-qov3MKfUVy_'
-});
+
 
 class PaymentRouteManager {
   createPayment = (req: Request, res: Response) => {
