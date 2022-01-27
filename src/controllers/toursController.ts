@@ -92,9 +92,10 @@ class TourController {
 
   getTour = async (req: Request, res: Response): Promise<object> => {
     try {
-
       const { id } = req.params;
-      const getTour = await Tour.findById(id);
+      const getTour = await Tour.findById(id)
+        .populate({ path: 'publisher', select: 'name email' });
+
       return JSONResponse.success(req, res, 200, 'Tour data found', getTour, 1);
     } catch (error) {
       return JSONResponse.serverError(req, res, 400, 'Something went wrong!', {});

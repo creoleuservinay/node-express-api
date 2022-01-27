@@ -5,6 +5,6 @@ const router = express.Router();
 router.post('/singup', authController.authController.singUp);
 router.post('/login', authController.authController.loggingIn);
 router.get('/logout', authController.authController.logOut);
-router.get('/all', authController.authController.getUsers);
+router.get('/all',authController.authController.protect, authController.authController.getUsers);
 
 module.exports = router;

@@ -21,7 +21,7 @@ const tourSchema = new Schema<TourInterface>({
   publisher: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: false
+    required: true
  }
 });
 
