@@ -31,15 +31,12 @@ const UserSchema = new Schema({
   passwordConfirm: {
     type: String,
     require: [true, 'Must have confirm password']
-  }
+  },
+  publishedTour: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Tour'
+ }]
 });
-
-// UserSchema.pre('save', async function (next) {
-//   if (!this.isModified('password')) return next();
-//     this.password = await bcrypt.hash(this.password, 12);
-//   next();
-// });
-
 const User = mongoose.model('User', UserSchema);
 
 //  Exporting modal class for global use.

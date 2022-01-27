@@ -3,23 +3,65 @@ import JSONResponse from '../libs/json-responses';
 import Tour from "../models/tourModel";
 import { TourInterface } from '../interface/tour-interface';
 import { Error } from 'mongoose';
+const jwt = require('jsonwebtoken');
+import User from '../models/userModal';
 
-class RouteManager {
+class TourController {
 
   getAllTours = async (req: Request, res: Response): Promise<object> => {
     try {
-      const allTours = await Tour.find({});
+      //const allTours = await Tour.find({});
+
+      const allTours = await Tour.find()
+        .populate({ path: 'publisher', select: 'name email' });
+
       return JSONResponse.success(req, res, 200, 'Tours', allTours, allTours.length);
     } catch (error) {
       return JSONResponse.serverError(req, res, 400, 'No result found!!', {});
     }
   };
 
+  getUser = function (req: Request, res: Response) {
+    if (req.headers && req.headers.authorization) {
+      let authorization = req.headers.authorization.split(' ')[1],
+        decoded;
+      try {
+        decoded = jwt.verify(authorization, process.env.JWT_SECRET);
+      } catch (e) {
+        return res.status(401).send('unauthorized');
+      }
+      return decoded.id;
+
+    }
+    return res.send(500);
+  }
+
   createTour = async (req: Request, res: Response): Promise<object> => {
     try {
+
       const tourData: TourInterface = req.body;
-      const newTour = await Tour.create(tourData);
-      return JSONResponse.success(req, res, 200, 'Tour created successfully', newTour, newTour.length);
+      const userId: any = this.getUser(req, res);
+
+      const newTour = await Tour.create({
+        name: tourData.name,
+        price: tourData.price,
+        publisher: userId
+      });
+      // const newTour = new Tour(tourData);
+      // newTour.publisher = userid;
+      // await newTour.save();
+
+      /**
+        * 1. Find the user User ID.
+        * 2. Call Push method on publishedTour key of User.
+        * 3. Pass newly created Tour as value.
+        * 4. Call save method.
+       */
+      const user = await User.findById({ _id: newTour.publisher });
+      user.publishedTour.push(newTour);
+      await user.save();
+
+      return JSONResponse.success(req, res, 200, 'Tour created successfully', newTour, 1);
     } catch (error) {
       return JSONResponse.serverError(req, res, 400, 'Something went wrong!!', {});
     }
@@ -29,7 +71,7 @@ class RouteManager {
     const { id } = req.params;
     try {
       const delRes = await Tour.deleteOne({ _id: id });
-      return JSONResponse.success(req, res, 200, 'Tour deleted successfully', {}, 1);
+      return JSONResponse.success(req, res, 200, 'Tour deleted successfully', {});
     } catch (error) {
       return JSONResponse.serverError(req, res, 404, 'Something went wrong!!', {});
     }
@@ -50,6 +92,7 @@ class RouteManager {
 
   getTour = async (req: Request, res: Response): Promise<object> => {
     try {
+
       const { id } = req.params;
       const getTour = await Tour.findById(id);
       return JSONResponse.success(req, res, 200, 'Tour data found', getTour, 1);
@@ -59,6 +102,6 @@ class RouteManager {
   };
 }
 
-const routeManager = new RouteManager();
+const tourcontroller = new TourController();
 
-export default { routeManager };
+export default { tourcontroller };

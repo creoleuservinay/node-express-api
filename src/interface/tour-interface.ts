@@ -3,6 +3,5 @@ export interface TourInterface{
     name: string;
     price: number;
     description?: string;
-    __v?: number
-
+    __v?: number   
 }

@@ -18,6 +18,11 @@ const tourSchema = new Schema<TourInterface>({
     type: String,
     trim: true,
   },
+  publisher: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: false
+ }
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
