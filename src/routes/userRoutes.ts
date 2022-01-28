@@ -7,4 +7,5 @@ router.post('/login', authController.authController.loggingIn);
 router.get('/logout', authController.authController.logOut);
 router.get('/all',authController.authController.protect, authController.authController.getUsers);
 
+
 module.exports = router;

@@ -5,7 +5,7 @@ import { TourInterface } from '../interface/tour-interface';
 import { Error } from 'mongoose';
 const jwt = require('jsonwebtoken');
 import User from '../models/userModal';
-
+const fs = require('fs');
 class TourController {
 
   getAllTours = async (req: Request, res: Response): Promise<object> => {
@@ -101,6 +101,18 @@ class TourController {
       return JSONResponse.serverError(req, res, 400, 'Something went wrong!', {});
     }
   };
+
+  importTour = async (req: Request, res: Response) => {
+    try {
+      const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`));
+      //console.log(`./util/seeders/tours.json`);
+      await Tour.create(tours);
+      //process.exit();
+      return JSONResponse.success(req, res, 200, 'Tour data import success', {}, 1);
+    } catch (error: any) {
+      return JSONResponse.serverError(req, res, 500, 'Something went wrong!', {});
+    }
+  }
 }
 
 const tourcontroller = new TourController();
